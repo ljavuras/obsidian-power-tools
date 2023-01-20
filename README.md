@@ -48,3 +48,6 @@ If you use customized filename formats, modify the template accordingly.
 The template will not work if a periodic note is created by clicking links to a non-existing periodic note. You will get a empty note with a correct periodic title in `Default location for new notes` rather than `Note folder` set in _Periodic Notes_.
 
 To fix this, manually move the note to the preferred location, and insert the tempelate manually with _Templater_.
+
+### Permanent fix
+Use _Tempelater_'s folder templates feature, combine with absolute paths in the template will fix it.
