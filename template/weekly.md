@@ -8,13 +8,18 @@ tR += '# ' + week.format('gggg [Week] w') + '\n';
 tR += '[[' + week.format('YYYY') + ']] / ';
 tR += '[[' + week.format('YYYY-[Q]Q|[Q]Q') + ']] / ';
 tR += '[[' + week.format('YYYY-MM|MMMM') + ']]';
-// If the week crosses a month
-// 2022 / Q4 / December - 2023 / Q1 / January
-if (week.format('M') != week.endOf('week').format('M')) {
-    tR += ' - ';
-    tR += '[[' + week.format('YYYY') + ']] / ';
-    tR += '[[' + week.format('YYYY-[Q]Q|[Q]Q') + ']] / ';
-    tR += '[[' + week.format('YYYY-MM|MMMM') + ']]';
+// If the week crosses a month it will include year / quarter / month that is crossed without duplication
+// 2023 / Q1 / January - 2023 / Q1 / February OR 2023 / Q1 / March - Q2 / April OR 2022 / Q4 / December - 2023 / Q1 / January
+const endOfWeekMoment = week.clone().endOf('week');
+if(week.format('M') != endOfWeekMoment.format('M')){
+	tR += ' - ';
+	if(weekMoment.format('YYYY') != endOfWeekMoment.format('YYYY')) {
+		tR += '[[' + endOfWeekMoment.format('YYYY') + ']] / '
+	}
+	if(weekMoment.format('Q') != endOfWeekMoment.format('Q')) {
+		tR += '[[' + endOfWeekMoment.format('YYYY-[Q]Q|[Q]Q') + ']] / '
+	}
+	tR += '[[' + endOfWeekMoment.format('YYYY-MM|MMMM') + ']]'
 }
 tR += '\n\n';
 
