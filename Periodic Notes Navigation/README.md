@@ -1,6 +1,6 @@
-# Obsidian Periodic Notes - Navigation Template
+# Periodic Notes Navigation
 
-Navigate between **daily**, **weekly**, **monthly**, **quarterly**, and **yearly** notes effortlessly in [Obsidian](https://obsidian.md/).
+Navigate between **daily**, **weekly**, **monthly**, **quarterly**, and **yearly** notes effortlessly with [Templater](https://github.com/SilentVoid13/Templater).
 
 ![Navigation example](assets/navigation%20example.gif)
 
@@ -20,7 +20,7 @@ There are two sets of templates:
 - Customize filename format (planned)
 - Customize link display text (planned)
 
-## Prerequisites
+## Requirements
 
 ### Plugins
 
@@ -34,7 +34,7 @@ Install plugins from _Community plugins_ tab within Obsidian.
 
 Enable `Trigger Templater on new file creation` setting for Templater.
 
-## Usage
+## How to Use
 
 ### Setup
 Copy the templates in `template/` or `template-simple/` to your vault, and configure _Periodic Note_'s settings to use those templates.
