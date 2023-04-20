@@ -18,33 +18,33 @@ let noteTypes = [
 
 for (const noteType of noteTypes) {
 
-	// If found a matching note title
+    // If found a matching note title
     if (moment(tp.file.title,
                noteType.format,
                true)
         .isValid()) {
 
-		// Get TFile of template
+        // Get TFile of template
         let templateTFile;
         try {
-	        // Get TFile
-	        templateTFile = app.vault.getAbstractFileByPath(
-	            `${templateFolder}/${noteType.template}`
-	        );
+            // Get TFile
+            templateTFile = app.vault.getAbstractFileByPath(
+                `${templateFolder}/${noteType.template}`
+            );
 
-			// Error handling
-	        if (!templateTFile) {
-		        let msg = "Template not found\n" +
-					      `${templateFolder}/${noteType.template} does not exist.`;
-				new Notice(msg);
-		        throw Error(msg);
-	        }
-	    } catch (e) {
-		    console.error(e);
-		    return;
-	    }
+            // Error handling
+            if (!templateTFile) {
+                let msg = "Template not found\n" +
+                          `${templateFolder}/${noteType.template} does not exist.`;
+                new Notice(msg);
+                throw Error(msg);
+            }
+        } catch (e) {
+            console.error(e);
+            return;
+        }
 
-		// Insert template
+        // Insert template
         templater.templater.append_template_to_active_file(
             templateTFile
         );
