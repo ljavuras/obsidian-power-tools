@@ -1,8 +1,6 @@
 <%*
-let templater = app.plugins.plugins["templater-obsidian"];
-
-// Put your template folder here
-let templateFolder = "path/to/template/folder";
+let templater      = app.plugins.plugins["templater-obsidian"];
+let templateFolder = templater.settings.templates_folder;
 
 /**
  * format:   momentjs format strings for filename
