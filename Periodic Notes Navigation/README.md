@@ -4,11 +4,9 @@ Navigate between **daily**, **weekly**, **monthly**, **quarterly**, and **yearly
 
 ![Navigation example](assets/navigation%20example.gif)
 
-Mess around and make it yours!
-
 ## About
 
-There are two sets of templates:
+This repository contains two sets of templates:
 
 | Template           | Description                                                |
 |--------------------|------------------------------------------------------------|
@@ -16,33 +14,34 @@ There are two sets of templates:
 | `template-simple/` | Includes only the barebone, easier to read and tinker with |
 
 ### Additional features provided by `template/`
+
 - Remove duplicated links in month-crossing-weeks, credits to [@PhyberApex](https://github.com/PhyberApex)
 - Customize filename format (planned)
 - Customize link display text (planned)
 
-## Requirements
+## Requirement
 
 ### Plugins
 
-Install plugins from _Community plugins_ tab within Obsidian.
+Install plugins via _Community plugins_ tab.
 
 - [Periodic Notes](https://github.com/liamcain/obsidian-periodic-notes)
 - [Templater](https://github.com/SilentVoid13/Templater)
 - [Calendar plugin](https://github.com/liamcain/obsidian-calendar-plugin) (optional)
 
-### Settings
-
-Enable `Trigger Templater on new file creation` setting for Templater.
-
 ## How to Use
 
 ### Setup
-Copy the templates in `template/` or `template-simple/` to your vault, and configure _Periodic Note_'s settings to use those templates.
+
+1. Copy the templates in `template/` or `template-simple/` to your vault
+2. Goto _Templater_ settings, enable `Trigger Templater on new file creation`
+3. Goto _Periodic Note_ settings, change template settings to use your template files
 
 Alternatively, you can copy the contents to your existing templates.
 
 ### Using the template
-Insert template automatically by clicking on the calender provided by _Calendar plugin_, or run _Periodic Notes_' command:
+
+Clicking on the calender provided by _Calendar plugin_, or run _Periodic Notes_' command will insert the templates automatically:
 
 ```
 Periodic Notes: Open daily note
@@ -53,6 +52,7 @@ Periodic Notes: Open quarterly note
 ```
 
 ### Customization
+
 The template uses **default filenames formats** for periodic notes, if you are using customized filename formats, modify the template accordingly.
 
 | Note      | Filename format |
@@ -65,10 +65,16 @@ The template uses **default filenames formats** for periodic notes, if you are u
 
 Refer to the [Templater documentation](https://silentvoid13.github.io/Templater/introduction.html) and [Moment.js documentation](https://momentjs.com/docs/) for further customization.
 
-### Pitfalls
-The template will not work if a periodic note is created by clicking links to a non-existing periodic note. You will get a empty note with a correct periodic title in `Default location for new notes` rather than `Note folder` set in _Periodic Notes_.
+### Using Filename Templates
 
-To fix this, manually move the note to the preferred location, and insert the tempelate manually with _Templater_.
+If you follow links to future notes, _Periodic Notes_ will not get triggered, result in a blank note in your default location.
 
-### Permanent fix
-Use _Templater_'s folder templates feature, combine with absolute paths in the template will fix it.
+To fix this, use [Filename Templates](/Filename%20Template/) to insert templates by filename, and put this snippet in front of your periodic templates:
+
+```
+<%*
+await tp.file.move(`path/to/periodic/notes/${tp.file.title}`);
+-%>
+```
+
+This snippet will move your periodic notes to the path you specify, and voilà, you can now click through time freely, might as well disable _Periodic Notes_.
