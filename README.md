@@ -16,4 +16,10 @@ Download the files for solutions you want to use, and follow the instructions de
 
 > Navigate between **daily**, **weekly**, **monthly**, **quarterly**, and **yearly** notes with [Templater](https://github.com/SilentVoid13/Templater) templates.
 > 
-> ![Periodic Notes Navigation Demo](Periodic%20Notes%20Navigation/assets/navigation%20example.gif)
+> ![Periodic Notes Navigation Demo](/Periodic%20Notes%20Navigation/assets/navigation%20example.gif)
+
+### [Filename Template](/Filename%20Template/)
+
+> Insert template based on filename of a new note, and also centralizes template settings into one script, making it easier to manage your templates accross various plugins.
+> 
+> ![Filename Template Demo](/Filename%20Template/assets/demo.gif)
