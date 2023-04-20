@@ -4,7 +4,7 @@ Insert template based on filename of a new note, and also centralizes template s
 
 ![Filename Template Demo](assets/demo.gif)
 
-Filename templates will help you by automatically populating the correct templates for daily or periodic notes that links to a future date, whenever you click on a non-existing note.
+Filename templates can help you automatically populate the correct templates for daily or periodic notes that links to a future date that is yet non-existing.
 
 ## Requirement
 
@@ -15,9 +15,9 @@ Filename templates will help you by automatically populating the correct templat
 ## How to Use
 
 1. Copy `main.md` to your vault's Templater template folder location.
-2. Modify `main.md` to fit your needs:
-    1. Modify `templateFolder` to the path of your template folder.
-    2. Modify `noteTypes`, which consists of the [momentjs format](https://momentjs.com/docs/#/displaying/format/) for filenames, and their corresponding templates.
+2. Modify `noteTypes` in `main.md` to configure template settings:
+    1. `format`: file name in [momentjs format](https://momentjs.com/docs/#/displaying/format/).
+    2. `template`: template for file whose name matches `format`.
 
 ### Set as Default Template
 

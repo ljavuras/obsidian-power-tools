@@ -20,6 +20,6 @@ Download the files for solutions you want to use, and follow the instructions de
 
 ### [Filename Template](/Filename%20Template/)
 
-> Inserts template based on filename. Centralizes template settings across various plugins for easier management.
+> Insert template based on filename of a new note, and also centralizes template settings into one script, making it easier to manage your templates accross various plugins.
 > 
 > ![Filename Template Demo](/Filename%20Template/assets/demo.gif)
