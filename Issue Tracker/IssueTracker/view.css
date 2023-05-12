@@ -1,0 +1,207 @@
+/**
+ * Dataview issue tracker
+ * 
+ * @author ljavuras <ljavuras.py@gmail.com>
+ * ======================================== */
+
+/* Colors */
+
+.issueTracker * {
+	--color-issue-open: #378a42;
+	--color-issue-closed: #6d5499;
+}
+
+.issue .label-chip[label="bug"] {
+	background-color: rgba(215, 58, 74, 0.18);
+	border-color: rgba(235, 156, 166, 0.3);
+	color: rgb(235, 156, 166);
+	text-decoration-color: rgb(235, 156, 166);
+}
+
+.issue .label-chip[label="enhancement"] {
+	background-color: rgba(162, 238, 239, 0.18);
+	border-color: rgba(160, 238, 238, 0.3);
+	color: rgb(160, 238, 238);
+	text-decoration-color: rgb(160, 238, 238);
+}
+
+.issue .label-chip[label="feature"] {
+	background-color: rgba(98, 181, 114, 0.18);
+	border-color: rgba(98, 181, 114, 0.3);
+	color: rgb(98, 181, 114);
+	text-decoration-color: rgb(98, 181, 114);
+}
+
+.issue .label-chip[label="milestone"] {
+	background-color: rgba(87, 102, 235, 0.18);
+	border-color: rgba(87, 102, 235, 0.3);
+	color: rgb(87, 102, 235);
+	text-decoration-color: rgb(87, 102, 235);
+}
+
+.issue .label-chip[label="issue"] {
+	background-color: rgba(219, 175, 92, 0.18);
+	border-color: rgba(219, 175, 92, 0.3);
+	color: rgb(219, 175, 92);
+	text-decoration-color: rgb(219, 175, 92);
+}
+
+/* Normalize style */
+
+button {
+	margin-right: 0;
+}
+
+.modal .setting-item {
+	padding: 6px 0;
+	border: none;
+}
+
+.issue a.issue-clickable.internal-link {
+	text-decoration: none;
+}
+
+.issues__searchBar {
+	display: flex;
+	gap: 12px
+}
+
+.issues__searchBar input {
+	flex: 1;
+	margin-right: 6px;
+	padding-left: 8px;
+	border: 1px solid;
+	border-radius: 3px;
+	caret-color: var(--text-accent);
+	box-shadow: none;
+}
+
+.theme-dark .issueTracker input {
+	color: var(--text-normal);
+	background-color: var(--background-modifier-form-field);
+	border-color: var(--background-modifier-border);
+}
+.theme-dark .issueTracker input:hover {
+	background-color: var(--background-modifier-form-field-highlighted);
+	border-color: var(--interactive-accent);
+}
+.theme-dark .issueTracker input:focus {
+	background-color: var(--background-modifier-form-field-highlighted);
+	border-color: var(--interactive-accent-hover);
+	box-shadow: none;
+}
+
+.issueTracker button {
+	color: var(--text-on-accent);
+	background-color: var(--interactive-accent);
+}
+.issueTracker button:hover {
+	background-color: var(--interactive-accent-hover);
+}
+.issueTracker button.mod-disabled {
+	background-color: var(--color-base-40);
+}
+
+/* Issue lists */
+
+.issues__issueList__toolbar {
+	display: flex;
+	margin-top: 16px;
+	padding: 12px 10px 10px;
+	background-color: var(--interactive-hover);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 10px 10px 0 0;
+}
+
+.issues__issueList__toolbar .status-toggle {
+	display: inline-flex;
+	align-items: center;
+	margin-right: 16px;
+	color: var(--text-muted);
+	font-size: var(--font-adaptive-small);
+	cursor: pointer;
+}
+
+.issues__issueList__toolbar .status-toggle:hover {
+	color: var(--text-normal);
+}
+
+.issues__issueList__toolbar .status-toggle svg {
+	margin-right: 6px;
+}
+
+.issueList .no-issues-message {
+	padding: 40px 40px 60px;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-color: var(--background-modifier-border);
+	border-radius: 0 0 10px 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.issue {
+	padding: 6px 0;
+	display: flex;
+	align-items: center;
+	border-width: 0 1px 1px 1px;
+	border-style: solid;
+	border-color: var(--background-modifier-border);
+}
+.issue:hover {
+	background-color: var(--interactive-hover);
+}
+.issue:last-child {
+	border-radius: 0 0 10px 10px;
+}
+
+.issue .issue-status {
+	display: flex;
+	margin: 0 12px 0 10px;
+}
+
+svg.issue-open,
+svg.issue-closed {
+	stroke-width: 2.5px;
+}
+
+.issue svg.issue-open * {
+	stroke: var(--color-issue-open);
+}
+
+.issue svg.issue-closed * {
+	stroke: var(--color-issue-closed);
+}
+
+.issue .issue-desc {
+	color: var(--text-faint);
+	font-size: var(--font-adaptive-small);
+}
+
+.issue .issue-body {
+	flex: 1;
+}
+
+.issue .label-chip {
+	background-color: transparent;
+    border: 1px solid var(--background-modifier-border);
+    padding: 0px 7px 1px 6px;
+    color: var(--text-muted);
+    font-size: var(--font-adaptive-small);
+    font-family: var(--font-ui);
+    text-align: center;
+    border-radius: 14px;
+}
+
+.issueTracker__createIssue input {
+	width: 100%;
+}
+
+.issueTracker__createIssue .title-setting {
+	margin-bottom: 6px;
+}
+
+.issueTracker__createIssue .label-setting .setting-item-info {
+	flex-grow: 0;
+}
