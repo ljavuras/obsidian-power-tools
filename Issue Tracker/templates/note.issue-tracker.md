@@ -9,18 +9,19 @@
 ```dataviewjs
 await dv.view("Issue Tracker/IssueTracker", {
     obsidian: obsidian,
+
     /** Options here */
 
-    // Name of your project, will be used as display name for your project note
+    // Name of project, used as display text of project note's link
     // project_name: <your project name>
 
-    // Title of your project note this issue tracker associates to
+    // Title of project note, used to find the project note
     // project_note: <project note name>
 
-    // Sub-folder where issue notes should go
+    // Sub-folder where issue notes go
     // issue_folder: "issues/",
 
-    // Template name, a template that exists in your templater folder, must include '.md'
+    // Template name, a template that exists in your templater folder
     // issue_template: "note.issue-tracker.issue.md",
 
     // Default query that shows up in the search bar
