@@ -23,3 +23,9 @@ Download the tools you want to use, and follow the instructions detailed in READ
 > A template that inserts another template based on file name.
 > 
 > ![Filename Template Demo](/Filename%20Template/assets/demo.gif)
+
+### [Issue Tracker](/Issue%20Tracker/)
+
+> A Github-ish Issue Tracker in Obsidian.
+>
+> ![Issue Tracker Demo](/Issue%20Tracker/assets/showcase.jpg)
