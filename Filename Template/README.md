@@ -1,10 +1,12 @@
 # Filename Template
 
-Insert template based on filename of a new note, and also centralizes template settings into one script, making it easier to manage your templates accross various plugins.
+A template that inserts another template based on file name.
+
+Centralizes template settings across different plugins into one script, useful if you are using Templater, Periodic Notes, Unique note creator...etc, all at the same time.
 
 ![Filename Template Demo](assets/demo.gif)
 
-Filename templates can help you automatically populate the correct templates for daily or periodic notes that links to a future date that is yet non-existing.
+Filename template can populate the correct template for daily/periodic notes, **even if the note is created by clicking links**.
 
 ## Requirement
 
@@ -12,23 +14,22 @@ Filename templates can help you automatically populate the correct templates for
 
 - [Templater](https://github.com/SilentVoid13/Templater)
 
-## How to Use
+## How to use
 
-1. Copy `main.md` to your vault's Templater template folder location.
-2. Modify `noteTypes` in `main.md` to configure template settings:
+1. Copy `filename_template.md` to your Templater template folder location.
+2. Modify `noteTypes` in `filename_template.md` to configure template settings:
     1. `format`: file name in [momentjs format](https://momentjs.com/docs/#/displaying/format/).
     2. `template`: template for file whose name matches `format`.
 
 ### Set as Default Template
 
-Ever changed location of you template files, and have to change 5+ template settings? Not anymore.
-
 1. Goto _Templater_ settings and find _Folder Templates_
-2. Toggle _Enable Folder Templates_, and click _Add New_
-3. Set _Folder_ to `/`, and _Template_ to `main.md`
+2. Toggle _Enable Folder Templates_, then click _Add New_
+3. Set _Folder_ to `/`, and _Template_ to `filename_template.md`
 
-`main.md` will be triggered when a new **empty** folder is created, and `main.md` will insert the appropriate template for the filename.
+`filename_template.md` will now be triggered whenever a new **empty note** is created, it will match note name with the format you specify, and insert the associated template.
 
-## Applications
+## You can also...
 
-If you need to use a specific template for a complex file path, such as `Project/yourProject/yourProject.md`, you can customize the code to detect it. This is not possible with the built-in Folder Templates feature of Templater.
+- Call `tp.file.move()` in your template, and the new note will move to its designated location.
+- Match complex file path, such as `Project/YourProject/YourProject.md`, which is not possible with the built-in Templater features.
