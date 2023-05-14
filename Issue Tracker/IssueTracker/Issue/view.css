@@ -1,0 +1,104 @@
+/**
+ * Dataview issue tracker
+ * 
+ * @author ljavuras <ljavuras.py@gmail.com>
+ * ======================================== */
+
+.issueTracker-issue * {
+	--color-issue-open: #378a42;
+	--color-issue-closed: #6d5499;
+}
+
+.issueTracker-issue .label-chip[label="bug"] {
+	background-color: rgba(215, 58, 74, 0.18);
+	border-color: rgba(235, 156, 166, 0.3);
+	color: rgb(235, 156, 166);
+	text-decoration-color: rgb(235, 156, 166);
+}
+
+.issueTracker-issue .label-chip[label="enhancement"] {
+	background-color: rgba(162, 238, 239, 0.18);
+	border-color: rgba(160, 238, 238, 0.3);
+	color: rgb(160, 238, 238);
+	text-decoration-color: rgb(160, 238, 238);
+}
+
+.issueTracker-issue .label-chip[label="feature"] {
+	background-color: rgba(98, 181, 114, 0.18);
+	border-color: rgba(98, 181, 114, 0.3);
+	color: rgb(98, 181, 114);
+	text-decoration-color: rgb(98, 181, 114);
+}
+
+.issueTracker-issue .label-chip[label="milestone"] {
+	background-color: rgba(87, 102, 235, 0.18);
+	border-color: rgba(87, 102, 235, 0.3);
+	color: rgb(87, 102, 235);
+	text-decoration-color: rgb(87, 102, 235);
+}
+
+.issueTracker-issue .label-chip[label="issue"] {
+	background-color: rgba(219, 175, 92, 0.18);
+	border-color: rgba(219, 175, 92, 0.3);
+	color: rgb(219, 175, 92);
+	text-decoration-color: rgb(219, 175, 92);
+}
+
+.issue-widgets {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.issue-widgets .status-display {
+    margin-right: 8px;
+    padding: 5px 10px 4px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.issue-widgets .status-display.status-open {
+    background-color: var(--color-issue-open);
+}
+
+.issue-widgets .status-display.status-closed {
+    background-color: var(--color-issue-closed);
+}
+
+.issue-widgets .issue-info {
+    color: var(--text-muted);
+}
+
+.issue-widgets .status-toggle {
+    margin-left: auto;
+}
+
+.issue-widgets .status-toggle.status-open {
+    background-color: var(--color-issue-closed);
+}
+
+.issue-widgets .status-toggle.status-closed {
+    background-color: var(--color-issue-open);
+}
+
+.issue-widgets .status-toggle:hover {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+.issue-labelBar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.issue-labelBar .label-chip {
+    border: 1px solid var(--background-modifier-border);
+    padding: 0px 7px 1px 6px;
+    color: var(--text-muted);
+    font-size: var(--font-adaptive-small);
+    font-family: var(--font-ui);
+    text-align: center;
+    border-radius: 14px;
+}
