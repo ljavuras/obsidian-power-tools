@@ -1,4 +1,4 @@
-# [[Untitled Project]] / Issues
+# [[Example Project]] / Issues
 ```dataviewjs
 await dv.view("Issue Tracker/IssueTracker", {
     obsidian: obsidian,

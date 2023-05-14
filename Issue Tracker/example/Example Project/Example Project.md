@@ -1,4 +1,4 @@
-[[Issues - Untitled Project|Issues]] [[Kanban - Untitled Project|Kanban]]
+[[Issues - Example Project|Issues]] [[Kanban - Example Project|Kanban]]
 
 This is an example project for [[Issue Tracker/README|Obsidian Issue Tracker]].
 

@@ -1,4 +1,4 @@
-# [[Issue Tracker/example/Untitled Project 2/README|Project: Custom Name]] / Issues
+# [[Issue Tracker/example/Example Project 2/README|Project: Custom Name]] / Issues
 ```dataviewjs
 await dv.view("Issue Tracker/IssueTracker", {
     obsidian: obsidian,
@@ -9,7 +9,7 @@ await dv.view("Issue Tracker/IssueTracker", {
     project_name: "Project: Custom Name",
 
     // Title of project note, used to find the project note
-    project_note: "Untitled Project 2/README",
+    project_note: "Example Project 2/README",
 
     // Sub-folder where issue notes go
     issue_folder: "30-39 Bugs and issues/31.01 issues/",
