@@ -77,3 +77,17 @@ Issue status can only be `open` or `closed`, you can query them with `is` or `st
 ### label & title
 
 Quotation marks can be used to preserve space, e.g., `label:"need help"`, `title:"blahaj support"`
+
+## Examples
+
+Two example projects are provided in [example](example/) folder. Try them out!
+
+1. Download this repository: Goto the [repository page](https://github.com/ljavuras/obsidian-power-tools/tree/main), click `code` button on top right > click `Download ZIP`, or use `git clone`.
+2. Unzip and open the repository as Obsidian vault.
+3. Install Dataview and Templater.
+4. Enable JavaScript Queries option in Dataview.
+5. Set Template Folder Location to `Issue Tracker/templates` in Templater.
+
+![Example Project](assets/example%20project.jpg)
+
+![Example Project 2](assets/example%20project%202.jpg)
