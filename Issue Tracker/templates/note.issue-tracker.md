@@ -13,10 +13,10 @@ await dv.view("Issue Tracker/IssueTracker", {
     /** Options here */
 
     // Name of project, used as display text of project note's link
-    // project_name: <your project name>
+    // project_name: <your project name>,
 
     // Title of project note, used to find the project note
-    // project_note: <project note name>
+    // project_note: <project note name>,
 
     // Sub-folder where issue notes go
     // issue_folder: "issues/",
