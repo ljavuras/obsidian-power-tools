@@ -516,7 +516,7 @@ class IssueTracker {
             this.issueTracker = issueTracker;
             this.issueFolder  = issueTracker.config.issues.folder_path;
             this.issues       = dv.pages(`"${this.issueFolder}"`)
-                                  .map(page => new this.Issue(page));
+                                  .map(page => new this.Issue(this.issueTracker, page));
 
             this.toolbar      = new this.ToolBar(issueTracker);
 
@@ -624,6 +624,14 @@ class IssueTracker {
                     this.el.appendChild(new Text(" "));
                     this.countText = this.el.appendChild(new Text(""));
                     this.el.appendChild(new Text(` ${label}`));
+                    // Update search query when clicking on status
+                    this.el.onclick = () => {
+                        var searchQuery = this.issueTracker.searchBar.searchQuery;
+                        var searchValue = searchQuery.input.value;
+                        var status = searchValue.includes("open") ? "open" : "closed";
+                        searchQuery.setValue(searchValue.replace(status,status === "open" ? "closed":"open"));
+                        searchQuery.submit();
+                    }
                 }
 
                 async refresh() {
@@ -634,7 +642,10 @@ class IssueTracker {
         }
 
         Issue = class {
-            constructor(dataview_page) {
+            constructor(issueTracker, dataview_page) {
+                // Added Issue Tracker to get the search query to update query with label search
+                this.issueTracker = issueTracker;
+
                 this.dv_file  = dataview_page.file;
                 this.file     = getFile(this.dv_file.path);
                 this.issueNo  = dataview_page.issueNo;
@@ -669,11 +680,18 @@ class IssueTracker {
                 });
                 for (const label of this.labels) {
                     issueBodyEl.appendChild(new Text(" "));
-                    issueBodyEl.createSpan({
+                    var labelChipSpan = issueBodyEl.createSpan({
                         cls: "label-chip",
                         attr: {label: label},
                         text: label,
-                    })
+                    });
+                    // update search query when clicking on a label
+                    labelChipSpan.onclick = () => {
+                        var searchQuery = this.issueTracker.searchBar.searchQuery;
+                        var searchValue = searchQuery.input.value;
+                        searchQuery.setValue(`is:${searchValue.includes("open")?"open":"closed"} label:"${label}"`);
+                        searchQuery.submit();
+                    }
                 }
                 issueBodyEl.createDiv({
                     cls: "issue-desc",
