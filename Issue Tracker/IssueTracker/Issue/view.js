@@ -50,6 +50,19 @@ class LabelChip {
         this.el = containerEl.createSpan({ cls: "label-chip" });
         this.el.setAttribute("label", labelText);
         this.el.innerHTML = labelText;
+        // Add onclick listener to go back to issueTracker and filter by label
+        this.el.onclick = () => {
+            // if the location is used as explained in the examples this should work
+            var issueTrackerPath = app.workspace.getActiveFile().parent.parent.path + "/Issue Tracker.md";
+            var issueTrackerFile = getFile(issueTrackerPath);
+            // Add frontmatter properties to keep track of the searched label and date when searched
+            app.fileManager.processFrontMatter(issueTrackerFile, (frontmatter)=> {
+                frontmatter["search"] = labelText;
+                frontmatter["searchDate"] = new Date();
+            });
+            // Then open the issue tracker file
+            app.workspace.getLeaf().openFile(issueTrackerFile);
+        }
     }
 }
 

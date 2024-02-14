@@ -17,14 +17,14 @@ const obsidian = input.obsidian;
  * Options
  */
 const default_options = {
-    
+
     /** Fallback for project name, use project note, or folder name if not supplied */
-    project_name: user_options?.project_note? user_options.project_note :
-                                              getCurrentFolderName(),
+    project_name: user_options?.project_note ? user_options.project_note :
+        getCurrentFolderName(),
 
     /** Fallback for project note, use project name, or folder name if not supplied */
-    project_note: user_options?.project_name? user_options.project_name :
-                                              getCurrentFolderName(),
+    project_note: user_options?.project_name ? user_options.project_name :
+        getCurrentFolderName(),
 
     /** Sub-folder where issue notes are */
     issue_folder: "issues/",
@@ -62,7 +62,7 @@ function resolvePath(basepath, relative_path) {
 
 // Special characters that aren't allowed for filename in Obsidian:
 // *"\/<>:|?#^[]
-const specialCharSet      = "*\"\\/<>:|?#^[]";
+const specialCharSet = "*\"\\/<>:|?#^[]";
 const specialCharSetRegex = /[*"\\/<>:|?#^[\]]/;
 
 /**
@@ -114,11 +114,11 @@ async function getFileContent(fileId) {
     if (typeof fileId == 'string') {
         tfile = getFile(fileId);
 
-    // fileId is TFile
+        // fileId is TFile
     } else if (fileId instanceof obsidian.TFile) {
         tfile = fileId;
 
-    // Handle error
+        // Handle error
     } else {
         new obsidian.Notice(
             "Cannot get file content.\n" +
@@ -137,11 +137,11 @@ async function getFileContent(fileId) {
  */
 async function openFile(file, mode = "current") {
     let modeMap = {
-        "current":     [false],
-        "new-tab":     [true],
+        "current": [false],
+        "new-tab": [true],
         "split-right": ["split"],
-        "split-down":  ["split", "horizontal"],
-        "new-window":  ["window"],
+        "split-down": ["split", "horizontal"],
+        "new-window": ["window"],
     };
 
     // file type check
@@ -194,7 +194,7 @@ class Tooltip {
      */
     constructor(parentEl, isError) {
         this.parentEl = parentEl;
-        this.isError  = isError;
+        this.isError = isError;
 
         this.el = createEl('div', { cls: "tooltip" });
         this.el.textNode = this.el.appendChild(new Text(""));
@@ -207,8 +207,8 @@ class Tooltip {
 
         let parentRect = this.parentEl.getBoundingClientRect();
         this.el.setCssProps({
-            "top":  `${parentRect.bottom + 8}px`,
-            "left": `${parentRect.left + (parentRect.width/2)}px`,
+            "top": `${parentRect.bottom + 8}px`,
+            "left": `${parentRect.left + (parentRect.width / 2)}px`,
         });
 
         this.mount();
@@ -238,9 +238,9 @@ const templater = {
     settings: {
         // Folder where templates are stored
         folder: app.plugins.plugins["templater-obsidian"]
-                .settings.templates_folder,
+            .settings.templates_folder,
     },
-    
+
     /**
      * Creates a new file from template
      * @param {string} filePath - Path of the new file
@@ -251,7 +251,7 @@ const templater = {
         let templatePath = obsidian.normalizePath(
             `${this.settings.folder}/${templateName}`
         );
-        
+
         // Create new file with template as its contents
         const newFile = await app.vault.create(
             filePath,
@@ -293,20 +293,20 @@ class IssueTracker {
 
                 /** A dataview link: [[path/to/ProjectNote.md|project_name]] */
                 /** Fallbacks to options.project_name */
-                link: getFileByName(options.project_note)?
+                link: getFileByName(options.project_note) ?
                     dv.page(getFileByName(options.project_note)?.path
-                        )?.file.link
+                    )?.file.link
                         .withDisplay(options.project_name) :
                     options.project_name,
             },
             issues: {
-                folder_path:   resolvePath(getCurrentFolderPath(), options.issue_folder),
+                folder_path: resolvePath(getCurrentFolderPath(), options.issue_folder),
                 template_name: options.issue_template,
             },
         };
 
         this.issueList = new this.IssueList(this);
-        this.filter    = new this.Filter(this);
+        this.filter = new this.Filter(this);
         this.searchBar = new this.SearchBar(this);
 
         this.el = createDiv({ cls: "issueTracker" });
@@ -329,10 +329,10 @@ class IssueTracker {
             delete query_without_status.status;
 
             return (await this.queryIssues(
-                    this.issueTracker.issueList.issues,
-                    query_without_status
-                ))
-                .filter((issue) => issue.status == status )
+                this.issueTracker.issueList.issues,
+                query_without_status
+            ))
+                .filter((issue) => issue.status == status)
                 .length;
         }
 
@@ -359,7 +359,7 @@ class IssueTracker {
                     }
                 }
             }
-            
+
             return issues
                 .filter((issue) => {
                     if (query?.status) {
@@ -390,7 +390,7 @@ class IssueTracker {
          */
         async filterIssues(issues) {
             return (await this.queryIssues(issues, this.query))
-                .sort(issue => issue, "asc", (issue1, issue2 )=> {
+                .sort(issue => issue, "asc", (issue1, issue2) => {
                     switch (this.sortBy) {
                         case "Newest":
                             return issue2.ctime.ts - issue1.ctime.ts;
@@ -408,8 +408,8 @@ class IssueTracker {
     SearchBar = class {
         constructor(issueTracker) {
             this.issueTracker = issueTracker;
-            this.searchQuery  = new this.SearchQuery(issueTracker);
-            this.el           = createDiv({ cls: "issues__searchBar" });
+            this.searchQuery = new this.SearchQuery(issueTracker);
+            this.el = createDiv({ cls: "issues__searchBar" });
         }
 
         render(containerEl) {
@@ -450,8 +450,39 @@ class IssueTracker {
                     }
                 }
 
-                this.setValue(issueTracker.config.issueTracker.default_query);
-                this.submit();
+                // Get the Issue Tracker file
+                var file = app.workspace.getActiveFile();
+                app.fileManager.processFrontMatter(file, (frontmatter) => {
+                    var now = new Date();
+                    // check if no searchDate property is available
+                    if (frontmatter["searchDate"] && frontmatter["searchDate"].length > 0) {
+                        // check if 15 seconds has passed since the search occured
+                        var searchDate = new Date(frontmatter["searchDate"]);
+                        searchDate.setSeconds(searchDate.getSeconds() + 15);
+                        if (searchDate < now) {
+                            // reset search when 15 seconds have passed
+                            frontmatter["search"] = "";
+                            frontmatter["searchDate"] = "";
+                            this.setValue(issueTracker.config.issueTracker.default_query);
+                            this.submit();
+                        } else {
+                            // apply search for that label
+                            this.setValue(
+                                issueTracker.config.issueTracker.default_query +
+                                ' label:"' +
+                                frontmatter["search"] +
+                                '"'
+                            );
+                            this.submit();
+                        }
+                    } else {
+                        // reset searchDate to be empty
+                        frontmatter["search"] = "";
+                        frontmatter["searchDate"] = "";
+                        this.setValue(issueTracker.config.issueTracker.default_query);
+                        this.submit();
+                    }
+                });
             }
 
             setValue(value) {
@@ -465,18 +496,18 @@ class IssueTracker {
 
             parseQuery() {
                 this.query = {
-                    status:  undefined,
-                    labels:  [],
-                    title:   [],
+                    status: undefined,
+                    labels: [],
+                    title: [],
                     content: [],
                 };
 
                 // Split queries by space, respects enclosed quotation marks
                 let queries = this.input.value.match(/((\S+)?"[^"]+")|[\S]+/g)
-                            || [];
+                    || [];
 
                 for (const query of queries) {
-                    let [ query_type, query_content ]
+                    let [query_type, query_content]
                         = query.match(/^(status|is|title|label):(.+)$/)?.slice(-2)
                         || [];
 
@@ -514,13 +545,13 @@ class IssueTracker {
     IssueList = class {
         constructor(issueTracker) {
             this.issueTracker = issueTracker;
-            this.issueFolder  = issueTracker.config.issues.folder_path;
-            this.issues       = dv.pages(`"${this.issueFolder}"`)
-                                  .map(page => new this.Issue(this.issueTracker, page));
+            this.issueFolder = issueTracker.config.issues.folder_path;
+            this.issues = dv.pages(`"${this.issueFolder}"`)
+                .map(page => new this.Issue(this.issueTracker, page));
 
-            this.toolbar      = new this.ToolBar(issueTracker);
+            this.toolbar = new this.ToolBar(issueTracker);
 
-            this.el       = createDiv({ cls: "issueList" });
+            this.el = createDiv({ cls: "issueList" });
             this.issuesEl = createDiv();
         }
 
@@ -555,7 +586,7 @@ class IssueTracker {
                 let contentEl = containerEl.createDiv({ cls: "no-issues-message" });
                 contentEl.appendChild(getIcon.open());
                 contentEl.appendChild(createEl('h3', { text: "Getting started" }));
-                
+
                 let msgEl = contentEl.createDiv();
                 let createFolderBtn = msgEl
                     .createEl('button', { text: "Create Folder" });
@@ -629,7 +660,9 @@ class IssueTracker {
                         var searchQuery = this.issueTracker.searchBar.searchQuery;
                         var searchValue = searchQuery.input.value;
                         var status = searchValue.includes("open") ? "open" : "closed";
-                        searchQuery.setValue(searchValue.replace(status,status === "open" ? "closed":"open"));
+                        searchQuery.setValue(
+                            searchValue.replace(status, label.toLowerCase())
+                        );
                         searchQuery.submit();
                     }
                 }
@@ -646,14 +679,14 @@ class IssueTracker {
                 // Added Issue Tracker to get the search query to update query with label search
                 this.issueTracker = issueTracker;
 
-                this.dv_file  = dataview_page.file;
-                this.file     = getFile(this.dv_file.path);
-                this.issueNo  = dataview_page.issueNo;
-                this.status   = dataview_page.status;
-                this.name     = dataview_page.file.name;
-                this.labels   = dataview_page.labels || [];
-                this.ctime    = dataview_page.file.ctime;
-                this.mtime    = dataview_page.file.mtime;
+                this.dv_file = dataview_page.file;
+                this.file = getFile(this.dv_file.path);
+                this.issueNo = dataview_page.issueNo;
+                this.status = dataview_page.status;
+                this.name = dataview_page.file.name;
+                this.labels = dataview_page.labels || [];
+                this.ctime = dataview_page.file.ctime;
+                this.mtime = dataview_page.file.mtime;
 
                 if (!Array.isArray(this.labels)) {
                     this.labels = this.labels.split(' ');
@@ -667,9 +700,9 @@ class IssueTracker {
                     cls: "issue-status",
                 });
                 issusStatusEl.appendChild(
-                    this.status == "open"   ? getIcon.open() :
-                    this.status == "closed" ? getIcon.closed() :
-                    createDiv({ text: "?" })
+                    this.status == "open" ? getIcon.open() :
+                        this.status == "closed" ? getIcon.closed() :
+                            createDiv({ text: "?" })
                 );
 
                 let issueBodyEl = this.el.createDiv({ cls: "issue-body" });
@@ -682,14 +715,14 @@ class IssueTracker {
                     issueBodyEl.appendChild(new Text(" "));
                     var labelChipSpan = issueBodyEl.createSpan({
                         cls: "label-chip",
-                        attr: {label: label},
+                        attr: { label: label },
                         text: label,
                     });
                     // update search query when clicking on a label
                     labelChipSpan.onclick = () => {
                         var searchQuery = this.issueTracker.searchBar.searchQuery;
                         var searchValue = searchQuery.input.value;
-                        searchQuery.setValue(`is:${searchValue.includes("open")?"open":"closed"} label:"${label}"`);
+                        searchQuery.setValue(`is:${searchValue.includes("open") ? "open" : "closed"} label:"${label}"`);
                         searchQuery.submit();
                     }
                 }
@@ -744,13 +777,13 @@ class IssueTracker {
         async submit() {
             let newIssueInfo = {
                 issueNo: this.issueTracker.issueList.issues.length + 1,
-                title:   this.titleInput.value,
-                path:    resolvePath(this.issueTracker.config.issues.folder_path,
-                                     this.titleInput.value + '.md'),
+                title: this.titleInput.value,
+                path: resolvePath(this.issueTracker.config.issues.folder_path,
+                    this.titleInput.value + '.md'),
 
                 // Split labels by space, respects enclosed quotations marks
-                labels:  this.labelInput.value?.match(/"[^"]+"|([^"\s]+)/g)
-                             ?.map(label => label.replaceAll('"', '')),
+                labels: this.labelInput.value?.match(/"[^"]+"|([^"\s]+)/g)
+                    ?.map(label => label.replaceAll('"', '')),
                 issueTrackerConfig: this.issueTracker.config,
             }
 
@@ -779,10 +812,10 @@ class IssueTracker {
 
             // Create issue from template
             let issueFile = await templater.createNewFileFromTemplate(
-                    newIssueInfo.path,
-                    this.issueTracker.config.issues.template_name
-                );
-            
+                newIssueInfo.path,
+                this.issueTracker.config.issues.template_name
+            );
+
             openFile(issueFile, "new-tab");
 
             this.close();
@@ -795,9 +828,9 @@ class IssueTracker {
  */
 class IssueInfoExporter {
     constructor(newIssueInfo) {
-        this.issueNo            = newIssueInfo.issueNo;
-        this.title              = newIssueInfo.title;
-        this.labels             = newIssueInfo.labels || [];
+        this.issueNo = newIssueInfo.issueNo;
+        this.title = newIssueInfo.title;
+        this.labels = newIssueInfo.labels || [];
         this.issueTrackerConfig = newIssueInfo.issueTrackerConfig;
 
         // Mount itself to window
@@ -825,7 +858,7 @@ class IssueInfoExporter {
      * https://github.com/blacksmithgu/obsidian-dataview/blob/master/src/data-model/value.ts#L416
      */
     get issueTrackerLink() { return this.issueTrackerConfig.issueTracker.link; }
-    get projectNoteLink()  { return this.issueTrackerConfig.project.link; }
+    get projectNoteLink() { return this.issueTrackerConfig.project.link; }
 }
 
 new IssueTracker(options).render(containerEl);
