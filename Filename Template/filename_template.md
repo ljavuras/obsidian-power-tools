@@ -50,7 +50,6 @@ for (const noteType of noteTypes) {
         );
     }
 }
--%>
 
 for (const noteType of noteTypes) {
     if (moment(tp.file.title,
