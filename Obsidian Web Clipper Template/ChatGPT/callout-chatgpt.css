@@ -27,7 +27,8 @@
 }
 
 .callout[data-callout="chatgpt-prompt"] .callout-content {
-    text-align: right;
+    display: flex;
+    flex-direction: column;
 }
 
 .callout[data-callout="chatgpt-prompt"] .callout-content > * {
