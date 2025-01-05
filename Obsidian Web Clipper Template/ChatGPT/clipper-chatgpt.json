@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "ChatGPT",
+  "behavior": "create",
+  "noteContentFormat": "{{selectorHtml:article[data-testid*=\"conversation-turn\"]|replace:\"/<svg.*?svg>/g\":\"\"|join:\"\"|markdown|replace:(\"/\\s*###### ChatGPT said\\:\\s*/g\":\"\\n\", \"/##### You said\\:\\s*/g\": \"[!ChatGPT] \")|blockquote|replace:\"/^> \\n> \\[!ChatGPT\\]/gm\":\"\\n> [!ChatGPT]\"}}",
+  "properties": [
+    {
+      "name": "created",
+      "value": "{{time|date:\\\"YYYY-MM-DDTHH:mm:ss.SSSZ\\\"}}",
+      "type": "date"
+    },
+    {
+      "name": "source",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "tags",
+      "value": "a/source/chat/LLM",
+      "type": "multitext"
+    }
+  ],
+  "triggers": [
+    "https://chatgpt.com/share",
+    "https://chatgpt.com/c"
+  ],
+  "noteNameFormat": "{{selector:title|safe_name}} - ChatGPT",
+  "path": ""
+}
