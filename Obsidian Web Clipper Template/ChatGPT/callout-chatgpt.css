@@ -77,7 +77,7 @@
     margin: auto;
     width: var(--gizmo-bot-avatar-size);
     height: var(--gizmo-bot-avatar-size);
-    stroke: var(--text-normal);
+    color: var(--text-normal);
 }
 
 .callout[data-callout="chatgpt-response"] .callout-title-inner {
