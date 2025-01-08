@@ -481,7 +481,6 @@ class IssueTracker {
               this.submit();
             } else {
               // apply search for that label
-              console.log(this.input.value);
               this.setValue(
                 this.input.value + " label:" + frontmatter["search"] + ""
               );
@@ -544,7 +543,6 @@ class IssueTracker {
               this.query.content.push(query_content);
           }
         }
-        console.log(this.query);
       }
 
       render(containerEl) {
@@ -767,7 +765,6 @@ class IssueTracker {
               var labelMatch = searchValue.match(/label:([^\s]+)/);
               if (labelMatch) {
                 var labelValue = labelMatch[1];
-                console.log(labelValue);
                 newSearchQuery = searchValue.replace(labelValue, label);
               }
             }
