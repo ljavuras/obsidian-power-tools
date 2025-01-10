@@ -680,7 +680,11 @@ class IssueTracker {
             var searchQuery = this.issueTracker.searchBar.searchQuery;
             var searchValue = searchQuery.input.value;
             var newSearchQuery = `is:${label.toLowerCase()}`;
-            if (searchValue != undefined && searchValue.length > 0) {
+            if (
+              searchValue != undefined &&
+              searchValue.length > 0 &&
+              searchValue.includes("is")
+            ) {
               var status = searchValue.includes("open") ? "open" : "closed";
               newSearchQuery = searchValue.replace(status, label.toLowerCase());
             }
@@ -747,26 +751,16 @@ class IssueTracker {
           });
           // update search query when clicking on a label
           labelChipSpan.onclick = () => {
-            /*var searchQuery = this.issueTracker.searchBar.searchQuery;
-            var searchValue = searchQuery.input.value;
-            var newSearchQuery = `is:${label.toLowerCase()}`;
-            if (searchValue != undefined && searchValue.length > 0) {
-              var status = searchValue.includes("open") ? "open" : "closed";
-              newSearchQuery = searchValue.replace(status, label.toLowerCase());
-            }
-            searchQuery.setValue(newSearchQuery);*/
             var searchQuery = this.issueTracker.searchBar.searchQuery;
             var searchValue = searchQuery.input.value;
             var newSearchQuery = `${
               searchValue.length > 0 ? searchValue + " " : ""
             }label:${label}`;
             if (searchValue != undefined && searchValue.length > 0) {
-              // Extract the value after "label:"
-              var labelMatch = searchValue.match(/label:([^\s]+)/);
-              if (labelMatch) {
-                var labelValue = labelMatch[1];
-                newSearchQuery = searchValue.replace(labelValue, label);
-              }
+              // replace every occurence of label with nothing
+              searchValue = searchValue.replace(/label:[^\s]+/g, "").trim();
+              // readd the selected label
+              newSearchQuery = `${searchValue} label:${label}`.trim();
             }
             searchQuery.setValue(newSearchQuery);
             searchQuery.submit();
