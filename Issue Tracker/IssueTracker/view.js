@@ -462,7 +462,7 @@ class IssueTracker {
         };
 
         // Get the Issue Tracker file
-        var file = app.workspace.getActiveFile();
+        var file = getFile(dv.current().file.path);
         app.fileManager.processFrontMatter(file, (frontmatter) => {
           var now = new Date();
           // check if no searchDate property is available
