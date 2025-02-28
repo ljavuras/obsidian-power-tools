@@ -54,7 +54,7 @@ function getIssueTrackerFile() {
     return getFile(cur.issueTracker.path)
   }
   // fallback to hardcoded "../Issue Tracker.md"
-  const path = dv.current().file.folder;
+  const path = cur.file.folder;
   const parent = path.substring(0, path.lastIndexOf('/')+1);
   return getFile(parent + "Issue Tracker.md");
 }
