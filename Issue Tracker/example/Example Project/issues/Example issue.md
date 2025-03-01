@@ -1,4 +1,5 @@
 ---
+issueTracker: "[[Issues - Example Project|Issues]]"
 issueNo: 1
 status: open
 labels:
@@ -9,7 +10,7 @@ labels:
   - milestone
 ---
 
-###### [[Example Project|Example Project]] / [[Issues - Example Project|Issues]]
+###### [[Example Project|Example Project]] / `= this.issueTracker`
 # Example issue
 ```dataviewjs
 dv.view("Issue Tracker/IssueTracker/Issue", { obsidian: obsidian });
