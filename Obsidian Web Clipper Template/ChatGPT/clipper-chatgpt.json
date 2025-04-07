@@ -2,7 +2,7 @@
   "schemaVersion": "0.1.0",
   "name": "ChatGPT",
   "behavior": "create",
-  "noteContentFormat": "{{selectorHtml:article[data-testid*=\"conversation-turn\"]|replace:\"/<svg.*?svg>/g\":\"\"|join:\"\"|remove_html:(\".text-token-text-secondary,.text-token-text-tertiary\")|markdown|replace:(\"/\\s*###### ChatGPT said\\:\\s*/g\":\"\\n\\n[!ChatGPT-response]\\n\", \"/##### You said\\:\\s*/g\": \"[!ChatGPT-prompt]\\n\", \"/^(#{1,6} .*?) \\*\\*(.*)\\*\\*$/gm\":\"$1 $2\")|blockquote|replace:\"\\n> \\n> [!ChatGPT-\":\"\\n\\n> [!ChatGPT-\"}}",
+  "noteContentFormat": "{{selectorHtml:article[data-testid*=\"conversation-turn\"]|replace:\"/<svg.*?svg>/g\":\"\"|join:\"\"|remove_html:(\".text-token-text-secondary,.text-token-text-tertiary\")|markdown|replace:(\"/\\s*###### ChatGPT said\\:\\s*/g\":\"\\n\\n[!ChatGPT-response]\\n\",\"/##### You said\\:\\s*/g\":\"[!ChatGPT-prompt]\\n\", \"/^(#{1,6} .*?) \\*\\*(.*)\\*\\*$/gm\":\"$1 $2\")|blockquote|replace:\"\\n> \\n> [!ChatGPT-\":\"\\n\\n> [!ChatGPT-\"}}",
   "properties": [
     {
       "name": "created",

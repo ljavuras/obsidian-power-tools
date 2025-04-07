@@ -43,6 +43,22 @@ function getFile(filePath) {
   return file;
 }
 
+
+/**
+ * Returns the TFile of the parent issue tracker if one can be found
+ * @returns {TFile}
+ */
+function getIssueTrackerFile() {
+  const cur = dv.current();
+  if (cur.issueTracker) { // try frontmatter link
+    return getFile(cur.issueTracker.path)
+  }
+  // fallback to hardcoded "../Issue Tracker.md"
+  const path = cur.file.folder;
+  const parent = path.substring(0, path.lastIndexOf('/')+1);
+  return getFile(parent + "Issue Tracker.md");
+}
+
 class LabelChip {
   constructor(containerEl, labelText) {
     this.el = containerEl.createSpan({ cls: "label-chip" });
@@ -51,9 +67,7 @@ class LabelChip {
     // Add onclick listener to go back to issueTracker and filter by label
     this.el.onclick = () => {
       // if the location is used as explained in the examples this should work
-      var issueTrackerPath =
-        app.workspace.getActiveFile().parent.parent.path + "/Issue Tracker.md";
-      var issueTrackerFile = getFile(issueTrackerPath);
+      var issueTrackerFile = getIssueTrackerFile();
       // Add frontmatter properties to keep track of the searched label and date when searched
       app.fileManager.processFrontMatter(issueTrackerFile, (frontmatter) => {
         frontmatter["search"] = labelText;

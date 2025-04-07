@@ -22,12 +22,13 @@ if (!window.newIssueInfo) {
 let issueInfo = window.newIssueInfo;
 -%>
 ---
+issueTracker: "<% issueInfo.issueTrackerLink %>"
 issueNo: <% issueInfo.issueNo %>
 status: open
 labels:<% issueInfo.labelsYAML %>
 ---
 
-###### <% issueInfo.projectNoteLink %> / <% issueInfo.issueTrackerLink %>
+###### <% issueInfo.projectNoteLink %> / `= this.issueTracker`
 # <% issueInfo.title %>
 ```dataviewjs
 dv.view("Issue Tracker/IssueTracker/Issue", { obsidian: obsidian });
